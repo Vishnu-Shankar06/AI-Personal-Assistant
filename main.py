@@ -16,8 +16,8 @@ class Assistant(Agent):
         super().__init__(
             instructions=AGENT_INSTRUCTION,
             llm=google.beta.realtime.RealtimeModel(
-            voice="Aoede",
-            temperature=0.4,
+            voice="charon",
+            temperature=0.2,
         ),
             tools=[
                 get_weather,
@@ -33,7 +33,10 @@ async def entrypoint(ctx: agents.JobContext):
     
     await ctx.connect()
 
-    session = AgentSession()
+    session = AgentSession( 
+        stt="deepgram/nova-3:multi",
+        turn_detection="multilingual",
+        )
 
     await session.start(
         room=ctx.room,
