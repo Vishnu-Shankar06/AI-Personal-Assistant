@@ -1,8 +1,9 @@
+fastapi
+uvicorn
 livekit-agents
 livekit-plugins-openai
 livekit-plugins-silero
 livekit-plugins-google
-livekit-plugins-turn-detector
 livekit-plugins-noise-cancellation
 mem0ai
 duckduckgo-search
