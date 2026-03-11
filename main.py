@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 
 from livekit import agents
 from livekit.agents import AgentSession, Agent, RoomInputOptions
-from livekit.plugins.turn_detector.multilingual import MultilingualModel
 from livekit.plugins import (
     noise_cancellation,
 )
