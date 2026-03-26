@@ -2,7 +2,6 @@ import os
 import asyncio
 from dotenv import load_dotenv
 
-# We import your exact tool to test it
 from tools import send_email
 
 load_dotenv()
@@ -10,7 +9,6 @@ load_dotenv()
 async def run_test():
     print("--- STARTING EMAIL TEST ---")
     
-    # Put your actual personal email in the quotes below!
     target_email = "YOUR_EMAIL@gmail.com"
     
     print(f"Attempting to log into Gmail as: {os.getenv('GMAIL_USER')}")

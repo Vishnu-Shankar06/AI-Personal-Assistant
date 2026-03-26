@@ -10,7 +10,7 @@ from typing import Optional
 
 @function_tool()
 async def get_weather(
-    context: RunContext,  # type: ignore
+    context: RunContext,
     city: str) -> str:
     """
     Get the current weather for a given city.
@@ -30,7 +30,7 @@ async def get_weather(
 
 @function_tool()
 async def search_web(
-    context: RunContext,  # type: ignore
+    context: RunContext,
     query: str) -> str:
     """
     Search the web using DuckDuckGo.
@@ -45,7 +45,7 @@ async def search_web(
 
 @function_tool()    
 async def send_email(
-    context: RunContext,  # type: ignore
+    context: RunContext,  
     to_email: str,
     subject: str,
     message: str,
@@ -61,39 +61,32 @@ async def send_email(
         cc_email: Optional CC email address
     """
     try:
-        # Gmail SMTP configuration
         smtp_server = "smtp.gmail.com"
         smtp_port = 587
-        
-        # Get credentials from environment variables
+
         gmail_user = os.getenv("GMAIL_USER")
-        gmail_password = os.getenv("GMAIL_APP_PASSWORD")  # Use App Password, not regular password
+        gmail_password = os.getenv("GMAIL_APP_PASSWORD")
         
         if not gmail_user or not gmail_password:
             logging.error("Gmail credentials not found in environment variables")
             return "Email sending failed: Gmail credentials not configured."
-        
-        # Create message
+    
         msg = MIMEMultipart()
         msg['From'] = gmail_user
         msg['To'] = to_email
         msg['Subject'] = subject
         
-        # Add CC if provided
         recipients = [to_email]
         if cc_email:
             msg['Cc'] = cc_email
             recipients.append(cc_email)
         
-        # Attach message body
         msg.attach(MIMEText(message, 'plain'))
         
-        # Connect to Gmail SMTP server
         server = smtplib.SMTP(smtp_server, smtp_port)
-        server.starttls()  # Enable TLS encryption
+        server.starttls()  
         server.login(gmail_user, gmail_password)
-        
-        # Send email
+
         text = msg.as_string()
         server.sendmail(gmail_user, recipients, text)
         server.quit()
